@@ -1,4 +1,4 @@
-# Astro Starter Kit: Blog
+# patrickvice.com
 
 ```sh
 npm create astro@latest -- --template blog
