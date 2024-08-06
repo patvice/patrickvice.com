@@ -9,13 +9,9 @@ COPY package.json  pnpm-lock.yaml ./
 FROM base AS prod-deps
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
-FROM base AS build-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN pnpm run build
-
 FROM build-deps AS build
 COPY . .
-RUN npm run build
+RUN pnpm build
 
 FROM base AS runtime
 COPY --from=prod-deps /app/node_modules ./node_modules
